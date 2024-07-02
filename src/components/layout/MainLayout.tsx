@@ -1,38 +1,38 @@
 import { Layout, Menu, MenuProps } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
+import { adminSideBarItems } from "../../routes/admin.routes";
 
 const { Header, Content, Footer, Sider } = Layout;
 
+//  const items:MenuProps['items']=[
+//     {
+//         key:'Dashboard',
+//         label:<NavLink to={'/admin/dashboard'}>Dashboard</NavLink>,
+//     },
 
- const items:MenuProps['items']=[
-    {
-        key:'Dashboard',
-        label:<NavLink to={'/admin/dashboard'}>Dashboard</NavLink>,
-    },
-
-    {
-        key:'User-Management',
-        label:"user Management",
-        children:[
-            {
-                key:'1',
-                label: <NavLink to={'/admin/create-admin'}>create admin</NavLink>
-            },
-            {
-                key:'2',
-                label: <NavLink to={'/admin/create-student'}>create student</NavLink>
-            },
-            {
-                key:'3',
-                label: <NavLink to={'/admin/create-faculty'}>create faculty</NavLink>
-            },
-        ]
-    },
- ]
+//     {
+//         key:'User-Management',
+//         label:"user Management",
+//         children: [
+//             {
+//                 key:'1',
+//                 label: <NavLink to={'/admin/create-admin'}>create admin</NavLink>
+//             },
+//             {
+//                 key:'2',
+//                 label: <NavLink to={'/admin/create-student'}>create student</NavLink>
+//             },
+//             {
+//                 key:'3',
+//                 label: <NavLink to={'/admin/create-faculty'}>create faculty</NavLink>
+//             },
+//         ]
+//     },
+//  ]
 
 const MainLayout = () => {
   return (
-    <Layout style={{height:'100vh'}}>
+    <Layout style={{ height: "100vh" }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -43,14 +43,14 @@ const MainLayout = () => {
           console.log(collapsed, type);
         }}
       >
-        <div style={{color:'white', textAlign:"center" }} >
-         <h1> ph university</h1>
-           </div>
+        <div style={{ color: "white", textAlign: "center" }}>
+          <h1> ph university</h1>
+        </div>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={adminSideBarItems}
         />
       </Sider>
       {/* ==================content started================ */}
@@ -63,7 +63,7 @@ const MainLayout = () => {
               minHeight: 360,
             }}
           >
-            <Outlet/>
+            <Outlet />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
