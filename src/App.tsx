@@ -1,10 +1,13 @@
 import MainLayout from "./components/layout/MainLayout";
-
+import { Provider } from 'react-redux'
+import { store } from "./redux/store";
 
 function App() {
   return (
     <div>
-       <MainLayout></MainLayout>
+    <Provider store={store}>
+      <MainLayout></MainLayout>
+    </Provider>
     </div>
   );
 }
