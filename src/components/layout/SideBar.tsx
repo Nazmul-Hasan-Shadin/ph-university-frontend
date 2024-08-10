@@ -11,27 +11,27 @@ const userRole = {
   ADMIN: "admin",
   FACULTY: "faculty",
   STUDENT: "student",
-} 
+};
 
 const SideBar = () => {
   // const role='admin'
- const user= useAppSelector(selectCurrentUser)
- console.log(user);
- 
+  const user = useAppSelector(selectCurrentUser);
+  console.log(user);
+
   let sidebarItems;
 
   switch (user!.role) {
-      case  userRole.ADMIN:
-     sidebarItems= sidebarItemGenerator(adminPaths,userRole.ADMIN);
-        break;
+    case userRole.ADMIN:
+      sidebarItems = sidebarItemGenerator(adminPaths, userRole.ADMIN);
+      break;
 
     case userRole.FACULTY:
       sidebarItems = sidebarItemGenerator(facultyPath, userRole.FACULTY);
       break;
 
-      case  userRole.STUDENT:
-        sidebarItems=  sidebarItemGenerator(adminPaths,userRole.STUDENT);
-           break;
+    case userRole.STUDENT:
+      sidebarItems = sidebarItemGenerator(adminPaths, userRole.STUDENT);
+      break;
 
     default:
       break;
@@ -39,6 +39,7 @@ const SideBar = () => {
 
   return (
     <Sider
+      style={{ height:'100vh', position: "sticky", top: "0", left: "0" }}
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={(broken) => {

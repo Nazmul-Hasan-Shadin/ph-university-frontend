@@ -1,5 +1,5 @@
 import { Button, Layout, Menu, MenuProps } from "antd";
-import {  Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import SideBar from "./SideBar";
 import { useAppDispatch } from "../../redux/hook";
@@ -34,19 +34,22 @@ const { Header, Content, Footer, Sider } = Layout;
 //  ]
 
 const MainLayout = () => {
-  const dispatch= useAppDispatch()
-  const handleLogOut= ()=>{
-      dispatch(logOut())
-  }
+  const dispatch = useAppDispatch();
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
 
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100%" }}>
       <SideBar />
 
       {/* ==================content started================ */}
       <Layout>
-        <Header style={{ padding: 0 }} > <Button onClick={handleLogOut}>LogOut</Button> </Header>
-         <Content style={{ margin: "24px 16px 0" }}>
+        <Header style={{ padding: 0 }}>
+          {" "}
+          <Button onClick={handleLogOut}>LogOut</Button>{" "}
+        </Header>
+        <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
               padding: 24,
