@@ -1,11 +1,11 @@
 export const nameOptions = [
     {
       value: "01",
-      label: "Autumn",
+      label: "Autum",
     },
     {
       value: "02",
-      label: "Summer",
+      label: "Summar",
     },
     {
       value: "03",

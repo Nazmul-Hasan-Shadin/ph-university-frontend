@@ -31,8 +31,8 @@ const BaseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOption);
   console.log(result);
 
-  if (result?.error?.status===401) {
-     toast.error('user is not found')
+  if (result?.error?.status===404) {
+     toast.error(result?.error?.data?.message)
   }
 
   if (result?.error?.status === 401) {
@@ -43,7 +43,7 @@ const BaseQueryWithRefreshToken: BaseQueryFn<
 
     const data = await res.json();
 
-    if (data.data.accessToken) {
+    if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
 
       api.dispatch(setUser({ user, token: data.data.accessToken }));
