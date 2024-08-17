@@ -1,5 +1,5 @@
 import { TAcademicSemister } from "../../../types/academicManagement.type";
-import { TResponsRedux } from "../../../types/global.type";
+import { TQueryParma, TResponsRedux } from "../../../types/global.type";
 
 import { baseApi } from "../../api/baseApi";
 
@@ -11,12 +11,9 @@ const academicManagementApi = baseApi.injectEndpoints({
         if (args) {
           console.log(args);
 
-          args.forEach((item) => {
-            return params.append(item.name, item.value);
+          args.forEach((item: TQueryParma) => {
+            return params.append(item.name, item.value as string);
           });
-
-    
-
         }
 
         return {
