@@ -11,6 +11,12 @@ import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAc
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent";
 import StudentData from "../pages/admin/userManagement/StudentData.tables";
+import StudentDetails from "../pages/admin/userManagement/StudentDetails";
+import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+import RegisteredSemester from "../pages/admin/courseManagement/RegisteredSemester";
+import Courses from "../pages/admin/courseManagement/Courses";
+import OfferedCourse from "../pages/faculty/OfferedCourse";
+import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
 
 export const adminPaths = [
   {
@@ -62,10 +68,14 @@ export const adminPaths = [
         element: <CreateStudent />,
       },
       {
-        name:'Students',
-        path:'student-data',
-        element:<StudentData/>
-    },
+        name: "Students",
+        path: "student-data",
+        element: <StudentData />,
+      },
+      {
+        path: "student-data/:studentId",
+        element: <StudentDetails />,
+      },
       {
         name: "Create Admin",
         path: "create-admin",
@@ -76,6 +86,38 @@ export const adminPaths = [
         path: "create-faculty",
         element: <CreateFaculty />,
       },
+    ],
+  },
+
+  {
+    name: "Course Management",
+    children: [
+      {
+        name: "Semester Registration",
+        path: "semester-registration",
+        element:<SemesterRegistration/>
+      },
+      {
+        name: "Regestered Semesters",
+        path: "registered-semesters",
+        element:<RegisteredSemester/>
+      },
+      {
+        name: "Create Course",
+        path: "create-course",
+        element:<CreateCourse/>
+      },
+      {
+        name: "Courses",
+        path: "courses",
+        element:<Courses/>
+      },
+      {
+        name: "Offer Course",
+        path: "offer-course",
+        element:<OfferedCourse/>
+      },
+
     ],
   },
 ];

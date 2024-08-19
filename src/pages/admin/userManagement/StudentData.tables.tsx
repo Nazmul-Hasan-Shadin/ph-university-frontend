@@ -1,11 +1,22 @@
 import { useGetAllSemesterQuery } from "../../../redux/feature/admin/academicManagement.api";
-import { Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  Pagination,
+  Space,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import { TAcademicSemister } from "../../../types/academicManagement.type";
 import { useState } from "react";
 import { TQueryParma, TStudent } from "../../../types";
 import { useGetAllStudentsQuery } from "../../../redux/feature/admin/userManagement.api";
+import { Link } from "react-router-dom";
 
-export type TTableData = Pick<TStudent, "name" | "id">;
+export type TTableData = Pick<
+  TStudent,
+  "name" | "id" | "email" | "contactNumber"
+>;
 
 const StudentData = () => {
   const [params, setParams] = useState<TQueryParma[]>([]);
@@ -26,11 +37,15 @@ const StudentData = () => {
 
   console.log(metaData);
 
-  const tableData = studentData?.data?.result.map(({ _id, fullName, id }) => ({
-    key: _id,
-    fullName,
-    id,
-  }));
+  const tableData = studentData?.data?.result.map(
+    ({ _id, fullName, id, email, contactNumber }) => ({
+      key: _id,
+      fullName,
+      id,
+      contactNumber,
+      email,
+    })
+  );
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -46,14 +61,29 @@ const StudentData = () => {
       key: "id",
       dataIndex: "id",
     },
+    {
+      title: "Email.",
+      key: "email",
+      dataIndex: "email",
+    },
+
+    {
+      title: "Contact No.",
+      key: "contactNumber",
+      dataIndex: "contactNumber",
+    },
 
     {
       title: "Action",
       key: "x",
-      render: () => {
+      render: (item) => {
+        console.log(item);
+
         return (
           <Space>
-            <button>Update</button>
+            <Link to={`/admin/student-data/${item?.key}`}>
+              <Button>Update</Button>
+            </Link>
             <button>Details</button>
             <button>Block</button>
           </Space>
@@ -96,7 +126,11 @@ const StudentData = () => {
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
       />
-      <Pagination onChange={(value)=>setPage(value)} pageSize={metaData.limit} total={metaData?.total} />
+      <Pagination
+        onChange={(value) => setPage(value)}
+        pageSize={metaData.limit}
+        total={metaData?.total}
+      />
     </>
   );
 };
