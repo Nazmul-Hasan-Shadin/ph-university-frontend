@@ -9,75 +9,76 @@ import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcade
 import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent";
+import StudentData from "../pages/admin/userManagement/StudentData.tables";
 
-
-
-
-
-export const adminPaths=[
-    {
-        name:'Dashboard',
-        path:'dashboard',
-        element:<AdminDashboard/>
+export const adminPaths = [
+  {
+    name: "Dashboard",
+    path: "dashboard",
+    element: <AdminDashboard />,
+  },
+  {
+    name: "Academic management",
+    children: [
+      {
+        name: "Create A. Semester",
+        path: "create-academic-semester",
+        element: <CreateAcademicSemester />,
+      },
+      {
+        name: " Academic Semester",
+        path: "academic-semester",
+        element: <AcademicSemester></AcademicSemester>,
+      },
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcademicFaculty />,
+      },
+      {
+        name: " Academic Faculty ",
+        path: "academic-faculty",
+        element: <AcademicFaculty />,
+      },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateAcademicDepartment />,
+      },
+      {
+        name: " Academic Department ",
+        path: "academic-departement",
+        element: <AcademicDepartment />,
+      },
+    ],
+  },
+  {
+    name: "User Management",
+    children: [
+      {
+        name: "Create Student",
+        path: "create-student",
+        element: <CreateStudent />,
+      },
+      {
+        name:'Students',
+        path:'student-data',
+        element:<StudentData/>
     },
-    {
-        name:"Academic management",
-        children:[
-            {
-                name:'Create A. Semester',
-                path:'create-academic-semester',
-                element:<CreateAcademicSemester/>
-            },
-            {
-                name:' Academic Semester',
-                path:'academic-semester',
-                element:<AcademicSemester></AcademicSemester>
-            },
-            {
-                name:'Create A. Faculty',
-                path:'create-academic-faculty',
-                element:<CreateAcademicFaculty/>
-            },
-            {
-                name:' Academic Faculty ',
-                path:'academic-faculty',
-                element:<AcademicFaculty/>
-            },
-            {
-                name:'Create A. Department',
-                path:'create-academic-department',
-                element:<CreateAcademicDepartment/>
-            },
-            {
-                name:' Academic Department ',
-                path:'academic-departement',
-                element:<AcademicDepartment/>
-            },
-        
-        ]
-    },
-    {
-        name:"User Management",
-        children:[
-            {
-                name:'Create Admin',
-                path:'create-admin',
-                element:<CreateAdmin/>
-            },
-            {
-                name:'create-faculty',
-                path:'create-faculty',
-                element:<CreateFaculty/>
-            },
-            {
-                name:'Create Student',
-                path:'create-student',
-                element:<AdminDashboard/>
-            },
-        ]
-    }
-]
-
+      {
+        name: "Create Admin",
+        path: "create-admin",
+        element: <CreateAdmin />,
+      },
+      {
+        name: "create-faculty",
+        path: "create-faculty",
+        element: <CreateFaculty />,
+      },
+    ],
+  },
+];
 
 // export const adminRoutes= adminPaths2.reduce((acc:TRoute[],items)=>{
 //     if (items.path && items.element ) {
@@ -99,9 +100,6 @@ export const adminPaths=[
 //     return acc
 // },[])
 
-
-
-
 // export  const adminSideBarItems = adminPaths.reduce((acc:TSidebarItem[], items) => {
 //     if (items.path && items.element) {
 //       acc.push({
@@ -119,11 +117,9 @@ export const adminPaths=[
 //         })),
 //       });
 //     }
-  
+
 //     return acc;
 //   }, []);
-
-
 
 // export const adminPaths=[
 //     {
