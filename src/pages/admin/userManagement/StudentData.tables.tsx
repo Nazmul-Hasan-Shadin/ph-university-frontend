@@ -1,5 +1,5 @@
 import { useGetAllSemesterQuery } from "../../../redux/feature/admin/academicManagement.api";
-import { Space, Table, TableColumnsType, TableProps } from "antd";
+import { Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
 import { TAcademicSemister } from "../../../types/academicManagement.type";
 import { useState } from "react";
 import { TQueryParma, TStudent } from "../../../types";
@@ -8,15 +8,23 @@ import { useGetAllStudentsQuery } from "../../../redux/feature/admin/userManagem
 export type TTableData = Pick<TStudent, "name" | "id">;
 
 const StudentData = () => {
-  const [params, setParams] = useState<TQueryParma[] | undefined>(undefined);
-  console.log(params, "para");
+  const [params, setParams] = useState<TQueryParma[]>([]);
+
+  const [page, setPage] = useState(1);
 
   const {
     data: studentData,
     isLoading,
     isFetching,
-  } = useGetAllStudentsQuery(params);
-  console.log(studentData);
+  } = useGetAllStudentsQuery([
+    { name: "limit", value: 2 },
+    { name: "page", value: page },
+    { name: "sort", value: "id" },
+    ...params,
+  ]);
+  const metaData = studentData?.data?.meta;
+
+  console.log(metaData);
 
   const tableData = studentData?.data?.result.map(({ _id, fullName, id }) => ({
     key: _id,
@@ -51,7 +59,7 @@ const StudentData = () => {
           </Space>
         );
       },
-      width:"1%"
+      width: "1%",
     },
   ];
 
@@ -79,13 +87,17 @@ const StudentData = () => {
     return <p>Loading</p>;
   }
   return (
-    <Table
-      loading={isFetching}
-      columns={columns}
-      dataSource={tableData}
-      onChange={onChange}
-      showSorterTooltip={{ target: "sorter-icon" }}
-    />
+    <>
+      <Table
+        loading={isFetching}
+        columns={columns}
+        pagination={false}
+        dataSource={tableData}
+        onChange={onChange}
+        showSorterTooltip={{ target: "sorter-icon" }}
+      />
+      <Pagination onChange={(value)=>setPage(value)} pageSize={metaData.limit} total={metaData?.total} />
+    </>
   );
 };
 
