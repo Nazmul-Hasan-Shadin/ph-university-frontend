@@ -72,18 +72,48 @@ const courseManageMentApi = baseApi.injectEndpoints({
         };
       },
     }),
-    addCourse:builder.mutation({
-      query:(data)=>{
-        console.log(data,'ih');
+    addCourse: builder.mutation({
+      query: (data) => {
+        console.log(data, "ih");
+
+        return {
+          url: `/courses/create-course`,
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["courses"],
+    }),
+
+    addFaculties: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/courses/${args.courseId}/assign-faculties`,
+          method: "PUT",
+          body: args.data,
+        };
+      },
+      invalidatesTags: ["courses"],
+    }),
+    getCourseFaculty: builder.query({
+      query: (args) => {
+        console.log(args,'iam ars');
         
         return {
-          url:`/courses/create-course`,
-          method:"POST",
-          body:data
-        }
+          url: `/courses/${args}/get-faculties`,
+          method: "GET",
+        };
       },
-      invalidatesTags:['courses']
-    })
+    }),
+
+    createOfferedCourse: builder.mutation({
+      query: (data) => ({
+        url: `offered-courses/create-offered-course`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["courses"],
+    }),
   }),
 });
 
@@ -93,4 +123,7 @@ export const {
   useUpdateRegisterSemesterStatusMutation,
   useGetAllCoursesQuery,
   useAddCourseMutation,
+  useAddFacultiesMutation,
+  useGetCourseFacultyQuery,
+  useCreateOfferedCourseMutation
 } = courseManageMentApi;

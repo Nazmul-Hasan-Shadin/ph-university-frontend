@@ -17,48 +17,54 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const [login, { data, error }] = useLoginMutation();
 
-  const defaultValues= {
-    id:'A-002',
-    password:'SecurePassword123'
-  }
+  const defaultValues = {
+    id: "2027020001",
+    password: "student1234",
+  };
 
   const onSubmit = async (data: FieldValues) => {
-  
-
     const toastId = toast.loading("Logging");
     const userInfo = {
       id: data.id,
       password: data.password,
-    }
+    };
 
     try {
       const res = await login(userInfo).unwrap();
+      console.log(res.data.needsPasswordChange);
 
       const user = verifyToken(res.data.accessToken) as TUser;
+      console.log(user);
 
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged In", { id: toastId });
-      navigate(`/${user.role}/dashboard`);
+
+      if (res?.data?.needsPasswordChange) {
+        navigate(`/change-password`);
+      }
+      else{
+        navigate(`/${user.role}/dashboard`);
+      }
+
+    
     } catch (error) {
       toast.error("something went wrong");
     }
   };
 
   return (
-    <Row justify={"center"} align={'middle'} style={{height:'100vh'}}>
-        <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
-      <div>
-        <label htmlFor="id">Id:</label>
-        {/* <input {...register("id")} type="text" id="id" /> */}
-        <PhIntput type={'text'} name={'id'} />
-      </div>
+    <Row justify={"center"} align={"middle"} style={{ height: "100vh" }}>
+      <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <div>
+          {/* <input {...register("id")} type="text" id="id" /> */}
+          <PhIntput label="ID" type={"text"} name={"id"} />
+        </div>
 
-      <div>
-        <label htmlFor="password">Id:</label>
-        <PhIntput type={'text'} name={'password'}  />
-      </div>
-      <Button htmlType="submit">Login</Button>
-    </PHForm>
+        <div>
+          <PhIntput type={"text"} name={"password"} label="Password" />
+        </div>
+        <Button htmlType="submit">Login</Button>
+      </PHForm>
     </Row>
   );
 };

@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
     <Provider store={store}>
-    <ProtectedRoute>
+    <ProtectedRoute role={undefined}>
     <MainLayout></MainLayout>
     </ProtectedRoute>
     </Provider>

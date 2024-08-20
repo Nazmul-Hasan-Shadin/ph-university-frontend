@@ -5,17 +5,19 @@ import { Controller } from "react-hook-form";
 type TInputProps = {
   type: string;
   name: string;
-  label:string
+  label:string;
+  disabled?:boolean
 };
 
-const PhIntput = ({ type, name,label }: TInputProps) => {
+const PhIntput = ({ type, name,label ,disabled}: TInputProps) => {
   // const {register}=useFormContext()
   return (
     <div style={{marginBottom:'20px'}}> 
 
       <Controller
         name={name}
-        render={({ field }) =><Form.Item label={label}> <Input {...field} type={type} id={name} /></Form.Item>}
+        
+        render={({ field }) =><Form.Item label={label}> <Input {...field} type={type} id={name}  disabled={disabled}/></Form.Item>}
       />
     </div>
   );
